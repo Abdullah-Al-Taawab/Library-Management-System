@@ -96,4 +96,25 @@ public class BookManagementEndpoint {
 
 
     }
+
+     /*  @GetMapping({"/list", "/list/{title}"})
+    public ResponseEntity<?> books(@PathVariable(value = "title", required = false) String title) {
+        try {
+            if (title == null) {
+                // Fetch the full list of books
+                List<Book> books = bookServiceImpl.find();
+                return ResponseEntity.ok(books); // Return list of books with status 200
+            } else {
+                // Fetch a book by title
+                Book book = bookServiceImpl.findByTitle(title);
+                return ResponseEntity.ok(book); // Return the found book with status 200
+            }
+        } catch (Exception e) {
+            // Handle errors and throw a custom exception
+            throw new BookApiException("No Book Data Found");
+        }
+    }*/
+
+
+    
 }
