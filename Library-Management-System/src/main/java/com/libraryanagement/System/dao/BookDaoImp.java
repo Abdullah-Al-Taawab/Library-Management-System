@@ -36,6 +36,34 @@ public class BookDaoImp {
         return em;
     }
 
+
+    public Book findByTitle(String title) {
+
+
+        Query query=entityManager.createQuery("FROM Book WHERE title = :title", Book.class);
+
+        query.setParameter("title", title);
+
+        Book book= (Book)query.getSingleResult();
+            return book;
+        }
+
+
+    public boolean findAuthorId(int Id) {
+
+
+        Query query=entityManager.createQuery("SELECT COUNT(a) FROM Author a WHERE a.id = :authorId");
+
+        query.setParameter("authorId", Id);
+
+        Long count = (Long) query.getSingleResult();
+
+        return count > 0;
+
+    }
+
+
+
     public Book save(Book book)
     {
 
