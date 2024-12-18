@@ -29,20 +29,25 @@ public class BookManagementEndpoint {
         this.bookServiceImpl=bookServiceImpl;
     }
 
-
-    @GetMapping("/list")
-    public List<Book> boooks() {
+    @GetMapping({"/list", "/list/{title}"})
+    public ResponseEntity<?> books(@PathVariable(value = "title", required = false) String title) {
         try {
-
-            List<Book> em = bookServiceImpl.find();
-
-            return em;
+            if (title == null) {
+                // Fetch the full list of books
+                List<Book> books = bookServiceImpl.find();
+                return ResponseEntity.ok(books); // Return list of books with status 200
+            } else {
+                // Fetch a book by title
+                Book book = bookServiceImpl.findByTitle(title);
+                return ResponseEntity.ok(book); // Return the found book with status 200
+            }
         } catch (Exception e) {
-            throw new BookApiException(" No Book Data fond ");
+            // Handle errors and throw a custom exception
+            throw new BookApiException("No Book Data Found");
         }
     }
 
-    @GetMapping("/list/{id}")
+ /*   @GetMapping("/list/{id}")
     public Book book(@PathVariable int id) {
         try {
             Book em = bookServiceImpl.findByID(id);
@@ -50,13 +55,19 @@ public class BookManagementEndpoint {
         } catch (Exception e) {
             throw new BookApiException(" Details of this book not found ");
         }
-    }
+    }*/
 
 
     @PostMapping("/add")
     public ResponseEntity<BookResponse> add(@Valid @RequestBody BookRequest bookRequest) {
 
         try {
+
+            if(!bookServiceImpl.findAuthorId(bookRequest.getAuthorId()))
+            {
+                throw new BookApiException(" Enter Valid AuthorID ");
+            }
+
             BookResponse response = new BookResponse();
 
             Book book = new Book();
@@ -97,7 +108,20 @@ public class BookManagementEndpoint {
 
     }
 
-     /*  @GetMapping({"/list", "/list/{title}"})
+
+  /*  @GetMapping("/list/{title}")
+    public Book book(@PathVariable String title) {
+        try {
+            Book em = bookServiceImpl.findByTitle(title);
+            return em;
+        } catch (Exception e) {
+            throw new BookApiException(" Details of this book not found ");
+        }
+    }*/
+
+
+
+  /*  @GetMapping({"/list", "/list/{title}"})
     public ResponseEntity<?> books(@PathVariable(value = "title", required = false) String title) {
         try {
             if (title == null) {
@@ -114,7 +138,4 @@ public class BookManagementEndpoint {
             throw new BookApiException("No Book Data Found");
         }
     }*/
-
-
-    
 }
