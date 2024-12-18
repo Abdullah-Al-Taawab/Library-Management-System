@@ -12,43 +12,47 @@ import lombok.NoArgsConstructor;
 import java.util.Date;
 
 @Entity
+@Table(name="author")
 public class Author {
 
     @Id
-    private int Author_id;
-    private String Author_name;
-    private Date Author_birthDate;
-
-    public Author(int Author_id, String Author_name, Date Author_birthDate) {
-        this.Author_id = Author_id;
-        this.Author_name = Author_name;
-        this.Author_birthDate = Author_birthDate;
-    }
+    @Column(name="id")
+    private int AuthorId;
+    @Column(name="name")
+    private String AuthorName;
+    @Column(name="birth_date")
+    private Date AuthorBirthDate;
 
     public Author() {
     }
 
-    public int getAuthor_id() {
-        return Author_id;
+    public Author(int authorId, Date authorBirthDate, String authorName) {
+        AuthorId = authorId;
+        AuthorBirthDate = authorBirthDate;
+        AuthorName = authorName;
     }
 
-    public void setAuthor_id(int author_id) {
-        Author_id = author_id;
+    public int getAuthorId() {
+        return AuthorId;
     }
 
-    public String getAuthor_name() {
-        return Author_name;
+    public void setAuthorId(int authorId) {
+        AuthorId = authorId;
     }
 
-    public void setAuthor_name(String author_name) {
-        Author_name = author_name;
+    public Date getAuthorBirthDate() {
+        return AuthorBirthDate;
     }
 
-    public Date getAuthor_birthDate() {
-        return Author_birthDate;
+    public void setAuthorBirthDate(Date authorBirthDate) {
+        AuthorBirthDate = authorBirthDate;
     }
 
-    public void setAuthor_birthDate(Date author_birthDate) {
-        Author_birthDate = author_birthDate;
+    public String getAuthorName() {
+        return AuthorName;
+    }
+
+    public void setAuthorName(String authorName) {
+        AuthorName = authorName;
     }
 }
