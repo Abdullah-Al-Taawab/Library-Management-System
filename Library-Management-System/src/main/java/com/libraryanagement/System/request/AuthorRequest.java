@@ -1,38 +1,43 @@
 package com.libraryanagement.System.request;
 
+import jakarta.validation.constraints.*;
 import jakarta.validation.constraints.Size;
+
+
 
 import java.util.Date;
 
 public class AuthorRequest {
 
-    private int id;
+    @NotNull
+    private int authorId;
+    @NotNull
+    private String authorName;
+    @NotNull
+    private Date authorBirthDate;
 
-    private String name;
-
-    private Date birthDate;
-
-    public String getName() {
-        return name;
+    @NotNull
+    public int getAuthorId() {
+        return authorId;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setAuthorId(@NotNull int authorId) {
+        this.authorId = authorId;
     }
 
-    public Date getBirthDate() {
-        return birthDate;
+    public @NotNull String getAuthorName() {
+        return authorName;
     }
 
-    public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
+    public void setAuthorName(@NotNull String authorName) {
+        this.authorName = authorName;
     }
 
-    public int getId() {
-        return id;
+    public @NotNull Date getAuthorBirthDate() {
+        return authorBirthDate;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setAuthorBirthDate(@NotNull Date authorBirthDate) {
+        this.authorBirthDate = authorBirthDate;
     }
 }
