@@ -62,17 +62,17 @@ public class AuthorManagementEndpoint {
             Author author = new Author();
 
 
-            author.setAuthor_id(authorRequest.getId());
+           author.setAuthorId(authorRequest.getAuthorId());
 
-            author.setAuthor_name(authorRequest.getName());
+            author.setAuthorName(authorRequest.getAuthorName());
 
-            author.setAuthor_birthDate(authorRequest.getBirthDate());
+            author.setAuthorBirthDate(authorRequest.getAuthorBirthDate());
 
 
             Author authorTemp = authorService.save(author);
 
 
-            response.setId(authorTemp.getAuthor_id());
+            response.setId(authorTemp.getAuthorId());
             response.setMessage(" Successfull ");
             return ResponseEntity.ok(response);
         } catch (Exception e) {
