@@ -4,6 +4,7 @@ import com.libraryanagement.System.dao.BookDaoImp;
 import com.libraryanagement.System.entity.Book;
 import com.libraryanagement.System.request.BookRequest;
 import com.libraryanagement.System.response.BookResponse;
+import jakarta.persistence.Query;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +31,11 @@ public class BookServiceImpl {
         return bookDaoImp.findByID(id);
     }
 
+    public Book findByTitle(String title)
+    {
+        return bookDaoImp.findByTitle(title);
+    }
+
     public List<Book> find()
     {
         return bookDaoImp.findall();
@@ -48,6 +54,16 @@ public class BookServiceImpl {
     {
         return bookDaoImp.Delete(id);
     }
+
+    public boolean findAuthorId(int Id) {
+
+
+        boolean flag=bookDaoImp.findAuthorId(Id);
+        return  flag;
+
+    }
+
+
 
 
 
